@@ -1,0 +1,6 @@
+# Activate virtual environment before modifying the project
+
+### Terminal script
+``` 
+./venv/Scripts/Activate.ps1 
+```
