@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import storefront
+from storefront.models import storefront
 
 # Register your models here.
 class storefrontAdmin(admin.ModelAdmin):

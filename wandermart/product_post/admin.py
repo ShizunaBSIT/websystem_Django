@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Product
+from product_post.models import Product
 
 # Register your models here.
 class postAdmin(admin.ModelAdmin):
