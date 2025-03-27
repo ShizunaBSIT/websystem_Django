@@ -21,5 +21,5 @@ class storefront(models.Model):
 
 
     def __str__(self):
-        return f"{self.storename}"
+        return self.storename
     
