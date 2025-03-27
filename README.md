@@ -6,6 +6,11 @@ In github desktop, you can create your branch and commit changes to it. Remember
 
 # Activate virtual environment before modifying the project
 
+### Creating virtual environment
+```
+python -m venv venv
+```
+
 ### Terminal script
 ``` 
 ./venv/Scripts/Activate.ps1 
