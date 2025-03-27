@@ -3,6 +3,7 @@ from product_post.models import Product
 
 # Register your models here.
 class postAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'store','dateadded',)
+    prepopulated_fields = {"page": ("name","store")}
 
 admin.site.register(Product, postAdmin)

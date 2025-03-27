@@ -14,10 +14,10 @@ class storefront(models.Model):
     address = models.TextField(default="No Physical Store")
     phonecontact = models.CharField(max_length=11)
     emailcontact = models.CharField(max_length=100)
-    slugpage = models.SlugField()
     storestatus = models.CharField(max_length=10, choices=STORE_STATUS_CHOICES, default='open')
     datecreated = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    slugpage = models.SlugField(default="")
 
 
     def __str__(self):

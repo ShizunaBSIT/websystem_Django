@@ -17,7 +17,7 @@ class Product(models.Model):
     stock = models.BigIntegerField()
     dateadded = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True) 
-    page = models.SlugField(max_length=50, unique_for_date=dateadded)
+    page = models.SlugField(unique_for_date='dateadded')
     status = models.CharField(max_length=10, choices=PRODUCT_LISTING_STATUS_CHOICES, default='draft')
 
     def __str__(self):
