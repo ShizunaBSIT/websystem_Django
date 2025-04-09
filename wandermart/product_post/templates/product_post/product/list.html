@@ -1,0 +1,23 @@
+{% extends "product_list/base.html" %}
+
+{% block title %} Wandermart : Product list {% endblock %}
+
+{% block content %}
+
+<!-- Add list of products here -->
+<h1> List of products </h1>
+
+{% for product in products %}
+    <div class="product_item">
+    <h2> <a href="{{product.get_absolute_url }}">
+        {{ product.name }}
+    </a> </h2>
+
+    <p class="date">
+        Listed: {{ product.publish }} by <!--{{ product.store.storename }}-->
+    </p>
+
+    </div>
+
+{% endfor %}
+{% endblock %}

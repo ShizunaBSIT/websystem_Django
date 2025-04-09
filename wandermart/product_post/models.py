@@ -2,6 +2,8 @@ from django.db import models
 from storefront.models import storefront
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
+from django.utils import timezone
 
 # product listing status choices
 PRODUCT_LISTING_STATUS_CHOICES = (
@@ -15,11 +17,12 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
     description = models.TextField()
-    store = models.ForeignKey(storefront, on_delete=models.CASCADE)
+    store = models.ForeignObject(storefront, on_delete=models.CASCADE)
     stock = models.BigIntegerField()
+    publish = models.DateTimeField(default=timezone.now)
     dateadded = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True) 
-    page = models.SlugField(default="") # for URL purposes
+    page = models.SlugField(max_length=250, unique_for_date='publish') # for URL purposes
     status = models.CharField(max_length=10, choices=PRODUCT_LISTING_STATUS_CHOICES, default='draft')
 
     def __str__(self):
@@ -36,3 +39,12 @@ class Review(models.Model):
     text = models.TextField()
     dateadded = models.DateField(auto_now_add=True)
 
+
+
+# absolute page url
+def get_absolute_url(self):
+    return reverse("product:product_post", args=[
+        self.publish.year, 
+        self.publish.month, 
+        self.publish.day, 
+        self.page])
