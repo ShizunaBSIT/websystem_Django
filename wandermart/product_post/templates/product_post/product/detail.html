@@ -1,11 +1,16 @@
 {% extends "product_post/base.html" %}
 
-{% block title %} {{ product.name }} {% endblock %}
-{% block content %}
-    <h1> {{post.title}}</h1>
-    <p class="date">
-        Listed: {{ product.publish }} by <!--{{ product.store.storename }}-->
-    </p>
+{% block title %}{{ product.name }}{% endblock %}
 
-    <!-- Place post details here -->
+{% block extra_css %}
+<link href="{% static 'css/product_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <p class="date">
+        Listed: {{ product.publish }}
+    </p>
+    <p class="price">₱{{ product.price }}</p>
+    <p>{{ product.description }}</p>
 {% endblock %}

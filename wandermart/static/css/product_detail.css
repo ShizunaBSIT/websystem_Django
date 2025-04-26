@@ -1,0 +1,16 @@
+/* Styles for the product detail page */
+.product_detail {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.product_detail h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.product_detail p {
+    font-size: 1.2em;
+    line-height: 1.5;
+}
