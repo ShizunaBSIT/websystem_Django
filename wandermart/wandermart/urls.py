@@ -20,8 +20,8 @@ from product_post import views as product_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', product_views.product_list, name='product_list'),
-    path('products/<int:year>/<int:month>/<int:day>/<slug:product>/', product_views.product_detail, name='product_detail'),
+    path('products/', product_views.product_list, name='list'),
+    path('products/<int:year>/<int:month>/<int:day>/<slug:product>/', product_views.product_detail, name='detail'),
 ]
 
 
