@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <title>{% block title %}WanderMart{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="/">WanderMart</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/storefront/">Stores</a>
+        </nav>
+    </header>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include "product_post/footer.html" %}
+</body>
+</html>
