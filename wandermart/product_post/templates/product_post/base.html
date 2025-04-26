@@ -1,9 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <title>{% block title %}WanderMart{% endblock %}</title>
+    <!-- Default CSS -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    
+    <!-- Allow additional CSS to be added per page -->
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <header>
@@ -14,10 +18,8 @@
         </nav>
     </header>
 
-    <div id="content">
+    <main>
         {% block content %}{% endblock %}
-    </div>
-
-    {% include "product_post/footer.html" %}
+    </main>
 </body>
 </html>

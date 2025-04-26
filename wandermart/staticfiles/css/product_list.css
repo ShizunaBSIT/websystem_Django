@@ -1,0 +1,20 @@
+/* Styles for the product list page */
+.product_item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    background-color: #f9f9f9;
+}
+
+.product_item h2 {
+    font-size: 1.5em;
+}
+
+.product_item a {
+    color: #333;
+    text-decoration: none;
+}
+
+.product_item a:hover {
+    text-decoration: underline;
+}
