@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Product
 
+def base(request):
+    return render(request, 'base.html')
+
 def product_list(request):
     # Filter products by publish date and status
     products = Product.objects.filter(status='published', publish__lte=timezone.now())  # Use `publish` instead of `published`

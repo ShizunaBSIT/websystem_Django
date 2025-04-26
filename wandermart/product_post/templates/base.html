@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WanderMart{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Default CSS -->
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    
+    <!-- Allow additional CSS to be added per page -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="fade-in">
+
+    <header class="bg-teal text-white py-3 animate-header">
+        <div class="container">
+            <h1><a href="/" class="text-white text-decoration-none">WanderMart</a></h1>
+            <nav>
+                <a href="/" class="text-white me-3 hover-underline">Home</a>
+                <a href="/storefront/" class="text-white hover-underline">Stores</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promotional Section with Animation -->
+    <section class="promo-section animate-promo py-5">
+        <div class="container text-center">
+            <h2 class="promo-title">Welcome to WanderMart! Explore our Delicious Offerings</h2>
+            <div class="promo-images d-flex justify-content-center">
+                <div class="promo-image slide-in-left">
+                    <img src="{% static 'images/fries.jpg' %}" alt="Food 1" class="img-fluid">
+                </div>
+                <div class="promo-image slide-in-right">
+                    <img src="{% static 'images/pinkbuldak.jpg' %}" alt="Food 2" class="img-fluid">
+                </div>
+                <div class="promo-image slide-in-left">
+                    <img src="{% static 'images/ramen.jpg' %}" alt="Food 3" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Store Section with Animation -->
+    <section class="store-section py-5">
+        <div class="container text-center">
+            <h2>Browse Our Stores</h2>
+            <div class="row store-row">
+                <div class="col-md-4 store-card animate-store">
+                    <div class="store-card-inner">
+                        <img src="{% static 'images/store1.jpg' %}" alt="Store 1" class="img-fluid">
+                        <button class="btn btn-primary">View Store</button>
+                    </div>
+                </div>
+                <div class="col-md-4 store-card animate-store">
+                    <div class="store-card-inner">
+                        <img src="{% static 'images/store2.jpg' %}" alt="Store 2" class="img-fluid">
+                        <button class="btn btn-primary">View Store</button>
+                    </div>
+                </div>
+                <div class="col-md-4 store-card animate-store">
+                    <div class="store-card-inner">
+                        <img src="{% static 'images/store3.jpg' %}" alt="Store 3" class="img-fluid">
+                        <button class="btn btn-primary">View Store</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Now Section with Background Image -->
+    <section class="shop-now-section" style="background-image: url('wandermart/stati/images/cat.jpg');">
+        <div class="container text-center shop-now-content">
+            <h2 class="text-white">Start Shopping Now!</h2>
+            <a href="/storefront/" class="btn btn-warning btn-lg">Shop Now</a>
+        </div>
+    </section>
+
+    <footer class="bg-light py-3">
+        <div class="container text-center">
+            <p>&copy; 2025 WanderMart. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
