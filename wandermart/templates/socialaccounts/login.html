@@ -1,0 +1,26 @@
+<!-- filepath: c:\Users\Nat\websystem_Django\wandermart\templates\socialaccount\login.html -->
+{% extends "account/base.html" %}
+{% load i18n static %}
+
+{% block head_title %}
+    {% blocktrans %}Google Login{% endblocktrans %}
+{% endblock %}
+
+{% block extra_css %}
+    <!-- Add custom CSS for Google login if needed -->
+    <link rel="stylesheet" href="{% static 'css/google-login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>{% blocktrans %}Log In with Google{% endblocktrans %}</h1>
+
+    <div class="google-login-section">
+        <p>{% blocktrans %}You are about to log in using your Google account.{% endblocktrans %}</p>
+        <a href="{% provider_login_url 'google' %}" class="btn btn-primary">
+            {% blocktrans %}Continue with Google{% endblocktrans %}
+        </a>
+        <a href="{% url 'account_login' %}" class="btn btn-link">
+            {% blocktrans %}Cancel and go back{% endblocktrans %}
+        </a>
+    </div>
+{% endblock %}

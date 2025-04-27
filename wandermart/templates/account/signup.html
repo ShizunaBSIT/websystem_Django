@@ -1,0 +1,36 @@
+<!-- filepath: c:\Users\Nat\websystem_Django\wandermart\templates\account\signup.html -->
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% blocktrans %}Sign Up{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% blocktrans %}Sign Up for Wandermart{% endblocktrans %}</h1>
+    <form method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% blocktrans %}Sign Up{% endblocktrans %}</button>
+    </form>
+
+    <hr>
+
+    <div class="social-login">
+        <h2>{% blocktrans %}Or sign up with{% endblocktrans %}</h2>
+        <a href="{% provider_login_url 'google' %}" class="btn btn-google">
+            {% blocktrans %}Continue with Google{% endblocktrans %}
+        </a>
+    </div>
+
+    <hr>
+
+    <div class="login-prompt">
+        <p>
+            {% blocktrans %}
+            Already have an account?
+            {% endblocktrans %}
+            <a href="{% url 'account_login' %}">{% blocktrans %}Log in here{% endblocktrans %}</a>.
+        </p>
+    </div>
+{% endblock %}

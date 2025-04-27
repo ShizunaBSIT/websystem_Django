@@ -1,0 +1,32 @@
+<!-- filepath: c:\Users\Nat\websystem_Django\wandermart\templates\account\base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}Wandermart{% endblock %}</title>
+    
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Add a navigation bar or header content here -->
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add footer content here -->
+    </footer>
+
+    <!-- Add JavaScript files -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

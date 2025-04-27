@@ -1,0 +1,15 @@
+<!-- filepath: c:\Users\Nat\websystem_Django\wandermart\templates\welcome.html -->
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% blocktrans %}Welcome{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% blocktrans %}Welcome to Wandermart!{% endblocktrans %}</h1>
+    <p>{% blocktrans %}You have successfully logged in.{% endblocktrans %}</p>
+    <a href="{% url 'account_logout' %}" class="btn btn-primary">
+        {% blocktrans %}Log Out{% endblocktrans %}
+    </a>
+{% endblock %}
