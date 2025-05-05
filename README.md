@@ -17,3 +17,8 @@ python -m venv venv
 ```
 
 ![When you run the script it should output (venv) and your current directory](https://drive.google.com/uc?export=view&id=1V_RvTTPa-G2mETTVP8LhDuGztcweCI7f)
+
+
+### How to easily install requirements for your virtual environment
+
+pip install -r requirements.txt

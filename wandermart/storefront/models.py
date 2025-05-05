@@ -8,7 +8,7 @@ STORE_STATUS_CHOICES = (
 )
 
 # storefront
-class storefront(models.Model):
+class Storefront(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     storename = models.CharField(max_length=100, unique=True)
     address = models.TextField(default="No Physical Store")
@@ -17,7 +17,7 @@ class storefront(models.Model):
     storestatus = models.CharField(max_length=10, choices=STORE_STATUS_CHOICES, default='open')
     datecreated = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slugpage = models.SlugField(default="")
+    slug = models.SlugField(default="")
 
 
     def __str__(self):
