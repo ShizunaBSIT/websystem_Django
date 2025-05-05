@@ -1,11 +1,50 @@
-{% extends "blog/base.html" %}
+{% extends "product_post/base.html" %}
 
 {% block title %} {{ product.name }} {% endblock %}
 {% block content %}
-    <h1> {{post.title}}</h1>
+    <h1> {{product.name}} </h1>
     <p class="date">
-        Listed: {{ product.publish }} by <!--{{ product.store.storename }}-->
+        Listed: {{ product.publish }} by {{ product.store }}
     </p>
 
     <!-- Place post details here -->
+    <p class="description">
+        {{ product.description }}
+    </p> 
+
+    {% with reviews.count as total_reviews %}
+        <h3> Reviews: {{ total_reviews }} </h3>
+    {% endwith %}
+
+
+    <!-- REVIEWS LIST -->
+    <!-- will consider adding pagination if I have the motivation -->
+    {% for review in reviews %}
+    <div class="review">
+        <p class="user">
+            {{ review.user }} <span class="date">{{ review.dateadded }}</span>
+        </p>
+        <p class="rating">
+            {{ review.rating }} out of 5
+        </p>
+        <p class="reviewtext">
+            {{ review.text }}
+        </p>
+    {% empty %}
+    <p class="emptyreviews">There are no reviews yet.</p>
+
+    {% endfor %}
+
+    <!-- REVIEW FORM -->
+    {% if new_review %}
+        <h3> Your review has been added. </h3>
+    {% else %}
+        <h2> Add a new Review </h2>
+        <form class="reviewform" method="post">
+            {{ review_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add Review"></p>
+        </form>
+    {% endif %}
+
 {% endblock %}
