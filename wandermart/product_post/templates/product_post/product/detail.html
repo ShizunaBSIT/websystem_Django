@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+
+{% block title %} {{ product.name }} {% endblock %}
+{% block content %}
+    <h1> {{post.title}}</h1>
+    <p class="date">
+        Listed: {{ product.publish }} by <!--{{ product.store.storename }}-->
+    </p>
+
+    <!-- Place post details here -->
+{% endblock %}
