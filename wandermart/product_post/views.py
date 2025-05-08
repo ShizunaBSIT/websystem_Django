@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Product
+from django.template import engines
+
+print(engines['django'].dirs)
 
 def base(request):
     return render(request, 'base.html')

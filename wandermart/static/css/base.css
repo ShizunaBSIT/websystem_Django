@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #008080; /* Teal */
+    background-color: #008080; 
     padding: 1rem;
     color: white;
     text-align: center;
@@ -61,7 +61,7 @@ h1 {
 /* Slide-In Effect for Promotional Images */
 .promo-image {
     opacity: 0;
-    transform: translateX(-100px); /* Initially move the image off-screen to the left */
+    transform: translateX(-100px); 
     animation-duration: 1s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
@@ -190,7 +190,7 @@ h1 {
 }
 
 .shop-now-content .btn:hover {
-    background-color: #ff6347;
+    background-color: #cf5039;
     transform: scale(1.1);
 }
 

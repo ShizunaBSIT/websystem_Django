@@ -1,20 +1,75 @@
-/* Styles for the product list page */
-.product_item {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 10px;
-    background-color: #f9f9f9;
+/* Overall container */
+.products-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff8f0;
 }
 
-.product_item h2 {
-    font-size: 1.5em;
+/* Page title */
+.page-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    color: #ff6b81;
+    margin-bottom: 2rem;
 }
 
-.product_item a {
-    color: #333;
+/* Grid layout for products */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* Individual product card */
+.product-card {
+    background: #ffeef2;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(255, 107, 129, 0.2);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(255, 107, 129, 0.4);
+}
+
+/* Product name */
+.product-name a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #ff6b81;
     text-decoration: none;
 }
 
-.product_item a:hover {
+.product-name a:hover {
     text-decoration: underline;
+}
+
+/* Date and Price */
+.product-date {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0.5rem 0;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    color: #ff3366;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* No products text */
+.no-products {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
 }
