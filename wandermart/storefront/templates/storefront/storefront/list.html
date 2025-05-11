@@ -1,2 +1,27 @@
 <!-- list of stores -->
 
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block title %}Store List{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="list-container">
+    <h1>Available Stores</h1>
+    <ul class="store-list">
+        {% for store in stores %}
+            <li>
+                <a href="{% url 'storefront:store_page' store.slug %}">{{ store.name }}</a>
+            </li>
+        {% empty %}
+            <li>No stores available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
