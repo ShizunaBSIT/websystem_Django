@@ -1,1 +1,21 @@
 <!-- detailed store page -->
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block title %}Store Details{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="store-container">
+    <h1>{{ store.name }}</h1>
+    <p class="store-description">{{ store.description }}</p>
+    <div class="store-info">
+        <p><strong>Location:</strong> {{ store.location }}</p>
+        <p><strong>Open Hours:</strong> {{ store.hours }}</p>
+    </div>
+</div>
+{% endblock %}
+
