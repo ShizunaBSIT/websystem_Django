@@ -1,0 +1,27 @@
+<!-- detailed store page -->
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block title %}Store Details{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="store-container">
+    <h1>{{ order.product }}</h1>
+    <h2> Placed on: {{ order.placedDate }}</h2>
+    <h2> Confirmed on: {{ order.confirmDate }}</h2>
+    <h2> To be delivered on: {{ order.deliveryDate }}</h2>
+
+    <h3> Quantity: {{ order.quantity }} </h3>
+
+    <p>
+        Phone Contact Number: {{order.phoneContact}} 
+        <br>
+        Delivery Address: {{ order.address }} </p>
+
+</div>
+{% endblock %}
+

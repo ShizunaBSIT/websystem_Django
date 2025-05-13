@@ -25,6 +25,7 @@ def product_detail(request, year, month, day, product):
     new_review = None
     
     if request.method == "POST":
+        #review_form = ReviewForm(data=request.POST, user=request.user)
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
@@ -35,6 +36,7 @@ def product_detail(request, year, month, day, product):
             new_review.save()
     
     else:
+        #review_form = ReviewForm(user=request.user)
         review_form = ReviewForm()
 
 

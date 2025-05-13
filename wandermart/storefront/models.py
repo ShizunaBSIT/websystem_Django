@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 STORE_STATUS_CHOICES = (
     ('open','Open'),
@@ -22,4 +23,11 @@ class Storefront(models.Model):
 
     def __str__(self):
         return self.storename
+    
+    def get_absolute_url(self):
+        return reverse("storefront_detail", 
+                       args=[
+                           self.slug
+                       ])
+    
     
