@@ -35,6 +35,13 @@
 
     {% endfor %}
 
+    <!-- USER -->
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}! <a href="{% url 'product_post:logout' %}">Logout</a></p>
+    {% else %}
+        <p><a href="{% url 'product_post:loginformpage' %}">Login</a></p>
+    {% endif %}
+
     <!-- REVIEW FORM -->
     {% if new_review %}
         <h3> Your review has been added. </h3>
@@ -46,5 +53,6 @@
             <p><input type="submit" value="Add Review"></p>
         </form>
     {% endif %}
+
 
 {% endblock %}

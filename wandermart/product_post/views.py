@@ -9,8 +9,9 @@ from django.views.generic import ListView
 # le forms
 from .forms import ReviewForm, LoginForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
 
 # Create your views here.
 def product_list(request):
@@ -78,3 +79,16 @@ def AccountLogin(request):
         login_form = LoginForm()
 
     return render(request, 'product_post/login.html', {"login_form":login_form})'''
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, "Successfully logged out!")
+    else:
+        messages.info(request, "You are already logged out.")
+    return redirect("product_post:product_list")
+
+    '''logout(request)
+    messages.success(request, "Successfully logged out!")
+    return redirect(request, 'product_post/product/list.html')'''
