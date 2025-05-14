@@ -3,18 +3,22 @@
 <html>
     <head> 
         <title>{% block title %}{% endblock %}</title>
-        <link href = "{% static "css/main.css" %}" rel="stylesheet">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/auth_style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
     </head>
     <body>
-        {% block navbar %}
-            {% include "navbar.html" %}
-        {% endblock %}
-
+        {% if request.path != '/login/' %}
+            <nav class="navbar">
+                {% block navbar %}
+                    {% include "navbar.html" %}
+                {% endblock %}
+            </nav>
+        {% endif %}
 
         <div id="content">
             {% block content %}
             {% endblock %}
         </div>
-
     </body>
 </html>

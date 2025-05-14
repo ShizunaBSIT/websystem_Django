@@ -28,7 +28,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True) 
     slug = models.SlugField(max_length=250, unique_for_date='publish') # for URL purposes
     status = models.CharField(max_length=10, choices=PRODUCT_LISTING_STATUS_CHOICES, default='draft')
-    image = models.CharField(max_length=255, default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbl6l7otaJhyzxtFkUxzrm5zY8xcgtKNdtbQ&s")
+    image = models.ImageField(upload_to='products/', null=True, blank=True)
     published = PublishedManager()
 
     def __str__(self):

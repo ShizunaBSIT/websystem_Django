@@ -1,14 +1,41 @@
 {% extends "product_post/base.html" %}
+{% load static %}
 
 {% block content %}
-<h1> Login <h1>
+<body class="login-page">
 
-    <form class="login_form" method="post">
-        {{ login_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Login"></p>
-    </form>
+    <div class="login-container">
+        <p class="back-link">
+            <a href="{% url 'product_post:product_list' %}">← Back to Homepage</a>
+        </p>
 
-<p> New to this website? Register <a href="{% url 'product_post:register' %}">here</a> </p>
+        <h1 class="title">Wandermart</h1>
+        <p class="subtitle">Discover global flavors, just a click away.</p>
 
+        <h2 class="welcome-msg">Welcome, {% if user.is_authenticated %}{{ user.username }}{% else %}Traveler{% endif %}! Your favorite treats await.</h2>
+
+        <form method="post" class="login-form">
+            {{ login_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="login-button">
+                <span class="chopsticks"></span> Login
+            </button>
+        </form>
+
+        <p class="register-link">
+            New here? <a href="{% url 'product_post:register' %}">Sign up</a> and start exploring!
+        </p>
+    </div>
+
+    <!-- Floating Food Decorations (using <img>) -->
+    <div class="floating-food-wrapper">
+        <img src="{% static 'images/snack5.png' %}" class="floating-food sushi" />
+        <img src="{% static 'images/snack3.png' %}" class="floating-food ramen" />
+        <img src="{% static 'images/snack21.png' %}" class="floating-food boba" />
+        <img src="{% static 'images/snack8.png' %}" class="floating-food snack8" />
+        <img src="{% static 'images/snack12.png' %}" class="floating-food snack12" />
+        <img src="{% static 'images/snack18.png' %}" class="floating-food snack18" />
+    </div>
+
+</body>
 {% endblock %}

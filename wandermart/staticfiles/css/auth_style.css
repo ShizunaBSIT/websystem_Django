@@ -1,0 +1,113 @@
+/* 🌸 Full-page layout for login only */
+.login-page {
+    font-family: "Noto Sans JP", "Noto Sans KR", sans-serif;
+    color: #333;
+    background: linear-gradient(to bottom, #f8efd4, #f7c5a1, #e7846f);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 🏯 Scoped Login Container */
+.login-page .login-container {
+    max-width: 380px; /* Slightly smaller for better proportion */
+    margin: auto;
+    text-align: center;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px; /* Softer rounded corners */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 🍣 Floating Food Icons */
+.login-page .floating-food-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* 🔹 Fixed Icon Sizes */
+.login-page .floating-food {
+    position: absolute;
+    width: 35px; /* Resized for better balance */
+    height: 35px;
+    background-size: contain;
+    animation: floatFood 4s infinite ease-in-out;
+}
+
+/* ✅ Ensure Images Show Properly */
+.login-page .sushi {
+    background: url("{% static 'images/snack5.png' %}") no-repeat center;
+}
+
+.login-page .ramen {
+    background: url("{% static 'images/snack3.png' %}") no-repeat center;
+}
+
+.login-page .boba {
+    background: url("{% static 'images/snack21.png' %}") no-repeat center;
+}
+
+
+/* 🍜 Floating Animation (Side-to-Side + Up-Down Motion) */
+@keyframes floatFood {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-15px) translateX(10px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+/* 🎭 Stylish Login Button */
+.login-page .login-button {
+    background: linear-gradient(to right, #e6524b, #ffae63);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    font-size: 16px; /* Slightly smaller for cleaner look */
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-page .login-button:hover {
+    background: #e6524b;
+    transform: scale(1.05);
+}
+
+/* 🥢 Scoped Chopsticks Animation */
+.login-page .chopsticks {
+    display: inline-block;
+    width: 15px; /* Smaller to match new button size */
+    height: 15px;
+    background: url('{% static "images/snack1.png" %}') no-repeat center;
+    background-size: contain;
+    animation: chopsticksBounce 1s infinite ease-in-out;
+    margin-right: 5px;
+}
+
+/* 🌅 Scoped Back to Homepage Button */
+.login-page .back-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-page .back-link a {
+    font-size: 16px;
+    color: #e6524b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-page .back-link a:hover {
+    text-decoration: underline;
+}
+
+/* 🌸 Smooth Fade-In Effect */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

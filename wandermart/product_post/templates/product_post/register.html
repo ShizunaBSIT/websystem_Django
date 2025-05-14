@@ -1,11 +1,65 @@
 {% extends "product_post/base.html" %}
+{% load static %}
 
 {% block content %}
-    <h1> Register </h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-    <p> Already have an account? <a href="{% url 'product_post:loginformpage' %}">Login</a></p>
+<body class="register-page">
+
+    <div class="register-container">
+        <p class="back-link">
+            <a href="{% url 'product_post:product_list' %}">← Back to Homepage</a>
+        </p>
+
+        <h1 class="title">Wandermart</h1>
+        <p class="subtitle">Join us and explore global flavors, one click away!</p>
+
+        <h2 class="welcome-msg">Register to get started</h2>
+
+        <form method="post" class="register-form">
+            {% csrf_token %}
+
+            <p>{{ form.username.label }}</p>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <p class="error-message">{{ form.username.errors }}</p>
+            {% endif %}
+
+            <p>{{ form.email.label }}</p>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <p class="error-message">{{ form.email.errors }}</p>
+            {% endif %}
+
+            <p>{{ form.password1.label }}</p>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <p class="error-message">{{ form.password1.errors }}</p>
+            {% endif %}
+
+            <p>{{ form.password2.label }}</p>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <p class="error-message">{{ form.password2.errors }}</p>
+            {% endif %}
+
+            <button type="submit" class="register-button">
+                <span class="chopsticks"></span> Register
+            </button>
+        </form>
+
+        <p class="register-link">
+            Already have an account? <a href="{% url 'product_post:loginformpage' %}">Login</a> and start exploring!
+        </p>
+    </div>
+
+    <!-- Floating Food Decorations -->
+    <div class="floating-food-wrapper">
+        <img src="{% static 'images/snack5.png' %}" class="floating-food sushi" />
+        <img src="{% static 'images/snack3.png' %}" class="floating-food ramen" />
+        <img src="{% static 'images/snack21.png' %}" class="floating-food boba" />
+        <img src="{% static 'images/snack8.png' %}" class="floating-food snack8" />
+        <img src="{% static 'images/snack12.png' %}" class="floating-food snack12" />
+        <img src="{% static 'images/snack18.png' %}" class="floating-food snack18" />
+    </div>
+
+</body>
 {% endblock %}
