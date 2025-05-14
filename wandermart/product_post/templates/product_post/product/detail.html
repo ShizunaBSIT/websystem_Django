@@ -12,6 +12,8 @@
         {{ product.description }}
     </p> 
 
+    <a href="{% url 'order:place_order' product.id %}"> Buy </a>
+
     {% with reviews.count as total_reviews %}
         <h3> Reviews: {{ total_reviews }} </h3>
     {% endwith %}

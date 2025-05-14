@@ -1,0 +1,26 @@
+{% extends "order/base.html" %}
+
+{% block title %} Wandermart :  Orders {% endblock %}
+
+{% block content %}
+
+<h1> List of Orders </h1>
+
+{% for order in orders %}
+    <div class="product_item">
+    <h2> <a href="{{ order.get_absolute_url }}">
+        {{ order.product }}
+    </a> </h2>
+    <h4> Order number: {{ order.orderNum }} </h4>
+
+    <p class="date">
+        Placed: {{ order.placedDate }}
+    </p>  
+
+    </div>
+
+{% endfor %}
+
+{% endblock %}
+
+{% include "footer.html" with page=page_obj %}

@@ -1,0 +1,15 @@
+{% extends 'order/base.html' %}
+
+{% block content %}
+    <h1> Place Order </h1>
+
+    <h4> Product: {{ product.name }} </h4>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ order_form.as_p }}
+        <button type="submit"> Place Order </button>
+    </form>
+
+    <a href="{% url 'product_post:product_detail' product.slug}"> Back to Product </a>
+{% endblock %}

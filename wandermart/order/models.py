@@ -25,6 +25,11 @@ class Order(models.Model):
     def __str__(self):
         return self.orderNum
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.orderNum
+        super().save(*args, **kwargs)
+    
     def get_absolute_url(self):
         return reverse("order:order_page", 
                        args=[

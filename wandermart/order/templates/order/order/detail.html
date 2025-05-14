@@ -1,0 +1,32 @@
+{% extends "order/base.html" %}
+
+{% block title %} Order details {% endblock %}
+{% block content %}
+    <h4> Order number: {{ order.orderNum }} </h4>
+
+    <p class="date">
+        Placed: {{ order.placedDate }} <br>
+        Confirmed: {{ order.confirmedDate }} <br>
+        Delivered: {{ order.deliveryDate }}
+    </p>
+
+    <p class="stock">
+        Quantity: {{ order.quantity }}
+    </p>
+
+    <p> Your written address:
+        {{order.address}} </p>
+
+    <p> Your written Contact: 
+        {{ order.phoneContact }} </p>
+
+    <p> Status: 
+    {% if order.isDelivered %}
+    Delivered
+    {% else %}
+    Not Delivered 
+    {% endif %}
+    </p>
+
+
+{% endblock %}
