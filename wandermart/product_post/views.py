@@ -7,7 +7,7 @@ from .exceptions import LoginRequired
 from django.views.generic import ListView
 
 # le forms
-from .forms import ReviewForm, LoginForm
+from .forms import ReviewForm, LoginForm, RegistrationForm #UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -56,6 +56,8 @@ class ProductListView(ListView):
     template_name = "product_post/product/list.html"
 
 
+##### LOGIN
+
 # check if user logged in
 def AccountLogin(request):
 
@@ -92,3 +94,22 @@ def logout_view(request):
     '''logout(request)
     messages.success(request, "Successfully logged out!")
     return redirect(request, 'product_post/product/list.html')'''
+
+
+##### REGISTER
+def register_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Account created successfully!")
+            return redirect('product_post:product_list')
+        else:
+            for error in form.errors.values():
+                for msg in error:
+                    messages.error(request, msg)
+    else:
+        form = RegistrationForm()
+    return render(request, 'product_post/register.html', {'form':form})

@@ -3,7 +3,7 @@ from .models import Review
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from .exceptions import LoginRequired
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 class ReviewForm(forms.ModelForm):
@@ -36,6 +36,16 @@ class ReviewForm(forms.ModelForm):
         return review
 
 
+#### REGISTRATION
+class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = UserCreationForm.Meta.fields + ('email',)
+
+
+### LOGIN
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
