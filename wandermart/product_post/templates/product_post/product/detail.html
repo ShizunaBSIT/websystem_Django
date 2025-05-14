@@ -1,7 +1,9 @@
 {% extends "product_post/base.html" %}
+{% load static %}
 
 {% block title %} {{ product.name }} {% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/prodcust_detail.css' %}">
     <h1> {{product.name}} </h1>
     <p class="date">
         Listed: {{ product.publish }} by {{ product.store }}

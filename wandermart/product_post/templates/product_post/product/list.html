@@ -1,31 +1,73 @@
 {% extends "product_post/base.html" %}
+{% load static %}
 
-{% block title %} Wandermart : Product list {% endblock %}
+{% block title %}Wandermart: Aesthetic Marketplace{% endblock %}
 
 {% block content %}
-
-<!-- Add list of products here -->
-<h1> List of products </h1>
-
-{% for product in products %}
-    <div class="product_item">
-    <h2> <a href="{{ product.get_absolute_url }}">
-        {{ product.name }}
-    </a> </h2>
-
-    <p class="date">
-        Listed: {{ product.publish }}
-    </p>
-    <p class="stock">
-        Stock: {{ product.stock }}
-    </p>
-
+<link rel="stylesheet" href="{% static 'css/list_product.css' %}">
+<script src="{% static 'js/animation.js' %}"></script> 
+<!-- Fullscreen Hero Section -->
+<section class="storefront-intro">
+    <div class="intro-content">
+        <h1>Welcome to Wandermart!</h1>
+        <p>Finding the international products, brought closer to you</p>
+        <button class="start-shopping" onclick="window.location.href='/'">🛍️ Start Shopping</button>
+        <div class="scroll-down">
+            <span>Scroll Down ▼</span>
+        </div>
     </div>
 
-{% endfor %}
+    <!-- Animated Images -->
+    <div class="image-container">
+        <img src="{% static 'images/snack1.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack2.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack3.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack4.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack5.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack6.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack7.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack8.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack9.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack10.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack11.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack12.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack13.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack14.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack15.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack16.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack17.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack18.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack19.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack20.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack21.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack22.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack23.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack24.png' %}" class="hero-image hidden">
+        <img src="{% static 'images/snack25.png' %}" class="hero-image hidden">
+    </div>
+</section>
+
+
+<!-- Product Grid -->
+<div class="container">
+    {% for product in products %}
+        <div class="product_card">
+            <div class="image-wrapper">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product_image">
+            </div>
+            <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+            <p class="date">Listed: {{ product.publish }}</p>
+            <p class="stock">Stock: {{ product.stock }}</p>
+            {% if product.stock > 0 %}
+                <button class="buy_now" onclick="window.location.href='/login'">Buy Now</button>
+            {% else %}
+                <button class="out_of_stock" disabled>Out of Stock</button>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
 
 {% include "pagination.html" with page=page_obj %}
+{% include "footer.html" with page=page_obj %}
 
 {% endblock %}
-
-{% include "footer.html" with page=page_obj %}
