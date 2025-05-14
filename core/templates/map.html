@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Map View{% endblock %}
+
+{% block content %}
+    <h2>Leaflet Map</h2>
+    <div id="map" style="height: 500px;"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const map = L.map('map').setView([13.5, 122.5], 6); // Initial view around the Philippines
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Static destination: SM Mall of Asia, Manila
+    const destination = [14.5358, 120.9817];
+    L.marker(destination).addTo(map).bindPopup("Destination: SM Mall of Asia");
+
+    let userMarker = null;
+    let routingControl = null;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(function (position) {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            const userPos = [userLat, userLng];
+
+            // Remove old marker and route
+            if (userMarker) {
+                map.removeLayer(userMarker);
+            }
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Add new marker
+            userMarker = L.marker(userPos).addTo(map).bindPopup("Your Location").openPopup();
+
+            // Fit bounds to include both points
+            const bounds = L.latLngBounds([userPos, destination]);
+            map.fitBounds(bounds);
+
+            // Draw route
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(userPos),
+                    L.latLng(destination)
+                ],
+                routeWhileDragging: false,
+                draggableWaypoints: false,
+                addWaypoints: false
+            }).addTo(map);
+
+        }, function (error) {
+            alert("Error watching position: " + error.message);
+        }, {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
+        });
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+</script>
+{% endblock %}
