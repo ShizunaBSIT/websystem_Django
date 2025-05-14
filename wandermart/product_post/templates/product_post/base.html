@@ -6,6 +6,11 @@
         <link href = "{% static "css/main.css" %}" rel="stylesheet">
     </head>
     <body>
+        {% block navbar %}
+            {% include "navbar.html" %}
+        {% endblock %}
+
+
         <div id="content">
             {% block content %}
             {% endblock %}
