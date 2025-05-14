@@ -14,3 +14,4 @@ ENV/
 # Migrations (optional: you can ignore migrations if you prefer)
 **/migrations/*.pyc
 **/migrations/__pycache__/
+**/migrations/*.log
