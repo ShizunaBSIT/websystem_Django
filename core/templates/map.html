@@ -3,8 +3,8 @@
 {% block title %}Map View{% endblock %}
 
 {% block content %}
-    <h2>Leaflet Map</h2>
-    <div id="map" style="height: 500px;"></div>
+<h2>Leaflet Map</h2>
+<div id="map" style="height: 500px;"></div>
 {% endblock %}
 
 {% block scripts %}
@@ -16,11 +16,18 @@
     }).addTo(map);
 
     // Static destination: SM Mall of Asia, Manila
-    const destination = [14.5358, 120.9817];
+    const destination = [14.5998, 120.990706];
     L.marker(destination).addTo(map).bindPopup("Destination: SM Mall of Asia");
 
     let userMarker = null;
     let routingControl = null;
+    map.on('mousemove', function (event) {
+        const lat = event.latlng.lat.toFixed(6);
+        const lng = event.latlng.lng.toFixed(6);
+
+        // Display the coordinates (You can replace this with a more styled UI)
+        document.getElementById('map').title = `Lat: ${lat}, Lng: ${lng}`;
+    });
 
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function (position) {
