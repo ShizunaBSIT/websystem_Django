@@ -10,11 +10,13 @@
 
 {% block content %}
 <div class="store-container">
-    <h1>{{ store.name }}</h1>
-    <p class="store-description">{{ store.description }}</p>
+    <h1>{{ store.storename }}</h1>
     <div class="store-info">
-        <p><strong>Location:</strong> {{ store.location }}</p>
-        <p><strong>Open Hours:</strong> {{ store.hours }}</p>
+        <p><strong>Owner:</strong> {{ store.owner }}</p>
+        <p><strong>Location:</strong> {{ store.address }}</p>
+        <p><strong>Phone Contact:</strong> {{ store.phonecontact }}</p>
+        <p><strong>Email address:</strong> {{ store.emailcontact }}</p>
+        <p><strong>Date Created:</strong> {{ store.datecreated }}</p>
     </div>
 </div>
 {% endblock %}
