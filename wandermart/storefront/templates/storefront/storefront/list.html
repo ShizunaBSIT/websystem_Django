@@ -10,13 +10,12 @@
 {% endblock %}
 
 {% block content %}
-{% include 'navbar.html' %}
 <div class="list-container">
     <h1>Available Stores</h1>
     <ul class="store-list">
         {% for store in stores %}
             <li>
-                <a href="{% url 'storefront:store_page' store.slug %}">{{ store.name }}</a>
+                <a href="{{ store.get_absolute_url }}">{{ store.storename }}</a>
             </li>
         {% empty %}
             <li>No stores available.</li>

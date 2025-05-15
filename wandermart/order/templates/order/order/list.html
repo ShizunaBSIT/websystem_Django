@@ -1,26 +1,28 @@
 {% extends "order/base.html" %}
+{% load static %}
 
-{% block title %} Wandermart :  Orders {% endblock %}
+{% block title %}Wandermart: Orders{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/order_list.css' %}">
 
-<h1> List of Orders </h1>
+<div class="orders-container">
+    <h1 class="orders-title">Your Orders</h1>
 
-{% for order in orders %}
-    <div class="product_item">
-    <h2> <a href="{{ order.get_absolute_url }}">
-        {{ order.product }}
-    </a> </h2>
-    <h4> Order number: {{ order.orderNum }} </h4>
-
-    <p class="date">
-        Placed: {{ order.placedDate }}
-    </p>  
-
-    </div>
-
-{% endfor %}
-
+    {% if orders %}
+        {% for order in orders %}
+            <div class="order-card">
+                <h2 class="product-name">
+                    <a href="{{ order.get_absolute_url }}">{{ order.product }}</a>
+                </h2>
+                <h4 class="order-number">Order Number: {{ order.orderNum }}</h4>
+                <p class="order-date">Placed on: {{ order.placedDate }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-orders">You have no orders yet.</p>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% include "footer.html" with page=page_obj %}

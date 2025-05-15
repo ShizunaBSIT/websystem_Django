@@ -3,12 +3,12 @@
         <a href="/">Storefront</a>
     </div>
     <ul class="nav-links">
-        <li><a href="/shop">Shop</a></li>
+        <li><a href="/store">Shop</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
     </ul>
     <div class="nav-icons">
-        <a href="/cart"><img src="/static/icons/cart.svg" alt="Cart"></a>
-        <a href="/profile"><img src="/static/icons/profile.svg" alt="Profile"></a>
+        <a href="{{ store.get_absolute_url }}"><img src="/static/icons/login1.svg" alt="login" width="30" height="30"></a>
+        <a href="{{ store.get_absolute_url }}"><img src="/static/icons/register1.svg" alt="login" width="30" height="30"></a>
     </div>
 </nav>

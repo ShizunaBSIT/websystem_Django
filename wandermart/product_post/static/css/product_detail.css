@@ -1,148 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
-
+/* General Styling */
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
-/* PRODUCT DISPLAY */
-.product_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-}
-
-.product_card {
-    background: #fff;
+/* Product Container */
+.product-detail-container {
+    max-width: 800px;
+    margin: auto;
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    text-align: center;
-}
-
-.product_image {
-    width: 100%;
-    height: auto;
+    background: #fff;
     border-radius: 10px;
-    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.product_name {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ff4e00;
+/* Header */
+.product-header {
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
 }
 
-.date {
-    font-size: 14px;
-    color: #666;
-}
-
-.description {
-    font-size: 16px;
-    margin-bottom: 15px;
-}
-
-.store {
+.product-title {
+    font-size: 2.4rem;
     font-weight: bold;
-    color: #ff4e00;
 }
 
-.buy_now {
-    background-color: #ff4e00;
+.product-meta {
+    color: #888;
+    font-size: 1rem;
+}
+
+/* Description */
+.product-description {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Buy Section */
+.buy-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.btn-buy {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #4CAF50, #388E3C);
     color: white;
-    padding: 12px 20px;
-    border: none;
+    text-decoration: none;
     border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.2rem;
 }
 
-.buy_now:hover {
-    background-color: #e64300;
+.btn-buy:hover {
+    background: linear-gradient(45deg, #45a049, #2E7D32);
+    transform: scale(1.05);
 }
 
-/* REVIEWS SECTION */
-.reviews_section {
-    margin-top: 30px;
-    max-width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Arrange Ratings in Columns */
-.review_card {
-    width: 200px;
-    margin: 10px;
-    background: white;
+/* Auth Box */
+.auth-box {
+    text-align: center;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Wrap to next row after 5 reviews */
-.review_card:nth-child(5n) { 
-    flex-basis: 100%;
-}
-
-.user {
-    font-weight: 600;
-}
-
-.rating {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ff4e00;
-}
-
-/* REVIEW FORM – Cute Style */
-.review_form_container {
-    margin-top: 30px;
-    max-width: 500px;
-    text-align: center;
-    background: #fff;
-    padding: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
     border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 1.1rem;
     transition: transform 0.3s ease-in-out;
 }
 
-.review_form_container:hover {
-    transform: scale(1.02);
+.auth-box:hover {
+    transform: scale(1.05);
 }
 
-h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ff4e00;
-}
-
-.success_msg {
-    font-size: 18px;
+/* Buttons */
+.btn-login, .btn-logout {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: white;
+    color: #2575fc;
     font-weight: bold;
-    color: #2ecc71;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
 }
 
-.submit_btn {
-    background-color: #ff4e00;
+.btn-login:hover, .btn-logout:hover {
+    background-color: #f0f0f0;
+}
+
+/* Review Form Styling */
+.review-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form input,
+.review-form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    border-color: #6a11cb;
+}
+
+/* Stylish Submit Button */
+.btn-submit {
+    background: linear-gradient(45deg, #ff8a00, #ff0059);
     color: white;
-    padding: 10px 15px;
     border: none;
-    border-radius: 20px;
-    font-size: 16px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
-.submit_btn:hover {
-    background-color: #e64300;
+.btn-submit:hover {
+    transform: scale(1.05);
+}
+
+/* Celebration Message */
+#celebration {
+    background: #d4edda;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #155724;
+    margin-top: 15px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Hide Animation Initially */
+.hidden {
+    display: none;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.star-rating {
+    color: #FFC107;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .product-title {
+        font-size: 2rem;
+    }
+
+    .btn-buy {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
+/* Confetti container */
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
 }

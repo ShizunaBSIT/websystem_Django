@@ -5,9 +5,9 @@ from .models import Storefront
 def store_list(request):
     stores = Storefront.objects.all()
 
-    return render(request, "storefront/storefront/list.html")
+    return render(request, "storefront/storefront/list.html", {"stores": stores})
 
 def store_page(request, store):
-    store = get_object_or_404(store, slug=store,)
+    store = get_object_or_404(Storefront, slug=store,)
 
     return render(request,"storefront/storefront/store.html",{'store':store})
