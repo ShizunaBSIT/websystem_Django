@@ -10,16 +10,12 @@
 
 {% block content %}
 <div class="store-container">
-    <h1>{{ store.storename }}</h1>
-    <p class="store-description">{{ store.address }}</p>
+    <h1>{{ store.name }}</h1>
+    <p class="store-description">{{ store.description }}</p>
     <div class="store-info">
-        <p><strong>Phone:</strong> {{ store.phonecontact }}</p>
-        <p><strong>Email:</strong> {{ store.emailcontact }}</p>
-        <p><strong>Status:</strong> {{ store.storestatus }}</p>
-        <p><strong>Date Created:</strong> {{ store.datecreated }}</p>
-        <p><strong>Last Updated:</strong> {{ store.updated }}</p>
+        <p><strong>Location:</strong> {{ store.location }}</p>
+        <p><strong>Open Hours:</strong> {{ store.hours }}</p>
     </div>
 </div>
-
 {% endblock %}
 

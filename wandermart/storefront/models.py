@@ -25,7 +25,7 @@ class Storefront(models.Model):
         return self.storename
     
     def get_absolute_url(self):
-        return reverse("storefront:store_page", 
+        return reverse("storefront_detail", 
                        args=[
                            self.slug
                        ])

@@ -1,33 +1,32 @@
 {% extends "order/base.html" %}
-{% load static %}
 
-{% block title %}Order Details{% endblock %}
-
+{% block title %} Order details {% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/order_detail.css' %}">
+    <h4> Order number: {{ order.orderNum }} </h4>
 
-<div class="order-detail-container">
-    <h2 class="order-heading">Order Details</h2>
+    <p class="date">
+        Placed: {{ order.placedDate }} <br>
+        Confirmed: {{ order.confirmedDate }} <br>
+        Delivered: {{ order.deliveryDate }}
+    </p>
 
-    <div class="order-detail-card">
-        <p><strong>Order Number:</strong> {{ order.orderNum }}</p>
+    <p class="stock">
+        Quantity: {{ order.quantity }}
+    </p>
 
-        <p class="date-info">
-            <strong>Placed:</strong> {{ order.placedDate }}<br>
-            <strong>Confirmed:</strong> {{ order.confirmedDate }}<br>
-            <strong>Delivered:</strong> {{ order.deliveryDate }}
-        </p>
+    <p> Your written address:
+        {{order.address}} </p>
 
-        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
-        <p><strong>Delivery Address:</strong> {{ order.address }}</p>
-        <p><strong>Contact:</strong> {{ order.phoneContact }}</p>
+    <p> Your written Contact: 
+        {{ order.phoneContact }} </p>
 
-        <p class="order-status">
-            <strong>Status:</strong>
-            <span class="{% if order.isDelivered %}delivered{% else %}not-delivered{% endif %}">
-                {% if order.isDelivered %}Delivered{% else %}Not Delivered{% endif %}
-            </span>
-        </p>
-    </div>
-</div>
+    <p> Status: 
+    {% if order.isDelivered %}
+    Delivered
+    {% else %}
+    Not Delivered 
+    {% endif %}
+    </p>
+
+
 {% endblock %}

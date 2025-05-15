@@ -1,113 +1,66 @@
 {% extends "product_post/base.html" %}
 {% load static %}
 
-{% block title %}{{ product.name }}{% endblock %}
-
+{% block title %} {{ product.name }} {% endblock %}
 {% block content %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="{% static 'product_post/css/product_detail.css' %}">
+=======
+<link rel="stylesheet" href="{% static 'css/prodcust_detail.css' %}">
+    <h1> {{product.name}} </h1>
+    <p class="date">
+        Listed: {{ product.publish }} by {{ product.store }}
+    </p>
+>>>>>>> parent of fdc7fcd (pre-deployment)
 
-<div class="product-detail-container">
+    <!-- Place post details here -->
+    <p class="description">
+        {{ product.description }}
+    </p> 
 
-    <!-- Product Header -->
-    <header class="product-header">
-        <h1 class="product-title">{{ product.name }}</h1>
-        <p class="product-meta">Listed: {{ product.publish }} by {{ product.store }}</p>
-    </header>
+    <a href="{% url 'order:place_order' product.id %}"> Buy </a>
 
-    <!-- Product Description -->
-    <section class="product-description">
-        <p>{{ product.description }}</p>
-    </section>
+    {% with reviews.count as total_reviews %}
+        <h3> Reviews: {{ total_reviews }} </h3>
+    {% endwith %}
 
-    <!-- Call to Action -->
-    <div class="buy-section">
-        <a class="btn-buy" href="{% url 'order:place_order' product.id %}">Buy Now</a>
-    </div>
 
-    <!-- Review Summary -->
-    <section class="reviews-summary">
-        {% with reviews.count as total_reviews %}
-            <h2>Reviews ({{ total_reviews }})</h2>
-        {% endwith %}
-    </section>
+    <!-- REVIEWS LIST -->
+    <!-- will consider adding pagination if I have the motivation -->
+    {% for review in reviews %}
+    <div class="review">
+        <p class="user">
+            {{ review.user }} <span class="date">{{ review.dateadded }}</span>
+        </p>
+        <p class="rating">
+            {{ review.rating }} out of 5
+        </p>
+        <p class="reviewtext">
+            {{ review.text }}
+        </p>
+    {% empty %}
+    <p class="emptyreviews">There are no reviews yet.</p>
 
-    <!-- Reviews List -->
-    <section class="reviews-list">
-        {% for review in reviews %}
-        <div class="review">
-            <div class="review-header">
-                <strong>{{ review.user }}</strong>
-                <span class="review-date">{{ review.dateadded }}</span>
-            </div>
-            <p class="review-rating">
-                {% for i in "12345"|slice:":review.rating"|make_list %}
-                    <span class="star-rating">★</span>
-                {% endfor %}
-                ({{ review.rating }} / 5)
-            </p>
-            <p class="review-text">{{ review.text }}</p>
-        </div>
-        {% empty %}
-        <p class="no-reviews">There are no reviews yet.</p>
-        {% endfor %}
-    </section>
+    {% endfor %}
 
-    <!-- Auth Status -->
-    <div class="auth-status">
-        {% if user.is_authenticated %}
-            <div class="auth-box">
-                <p>👋 Welcome, <strong>{{ user.username }}</strong>!</p>
-                <a href="{% url 'product_post:logout' %}" class="btn-logout">Logout</a>
-            </div>
-        {% else %}
-            <div class="auth-box">
-                <p>Ready to join the conversation?</p>
-                <a href="{% url 'product_post:loginformpage' %}" class="btn-login">Login & Share Your Thoughts</a>
-            </div>
-        {% endif %}
-    </div>
-
-    <!-- Add Review -->
+    <!-- USER -->
     {% if user.is_authenticated %}
-        <section class="add-review-form">
-            {% if new_review %}
-                <div class="review-success">
-                    <h3>🎉 Your review has been added!</h3>
-                </div>
-
-                <!-- Confetti script -->
-                <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-                <script>
-                    window.addEventListener("DOMContentLoaded", function () {
-                        confetti({
-                            particleCount: 150,
-                            spread: 70,
-                            origin: { y: 0.6 }
-                        });
-                    });
-                </script>
-            {% else %}
-                <h3>Share Your Thoughts</h3>
-                <form method="post" class="review-form">
-                    {% csrf_token %}
-                    {{ review_form.as_p }}
-                    <input type="submit" class="btn-submit" value="Submit Review">
-                </form>
-            {% endif %}
-        </section>
+        <p>Welcome, {{ user.username }}! <a href="{% url 'product_post:logout' %}">Logout</a></p>
+    {% else %}
+        <p><a href="{% url 'product_post:loginformpage' %}">Login</a></p>
     {% endif %}
-</div>
-{% endblock %}
 
-{% block extra_scripts %}
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-function triggerCelebration() {
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
-}
-</script>
+    <!-- REVIEW FORM -->
+    {% if new_review %}
+        <h3> Your review has been added. </h3>
+    {% else %}
+        <h2> Add a new Review </h2>
+        <form class="reviewform" method="post">
+            {{ review_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add Review"></p>
+        </form>
+    {% endif %}
+
+
 {% endblock %}

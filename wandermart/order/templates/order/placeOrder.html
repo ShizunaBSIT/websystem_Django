@@ -1,24 +1,15 @@
 {% extends 'order/base.html' %}
-{% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/place_order.css' %}">
+    <h1> Place Order </h1>
 
-<div class="order-container">
-    <h1 class="order-title">Place Your Order</h1>
+    <h4> Product: {{ product.name }} </h4>
 
-    <div class="product-info">
-        <h4 class="product-name">Product: <span>{{ product.name }}</span></h4>
-    </div>
-
-    <form method="post" class="order-form">
+    <form method="post">
         {% csrf_token %}
         {{ order_form.as_p }}
-        <button type="submit" class="btn-submit">Place Order</button>
+        <button type="submit"> Place Order </button>
     </form>
 
-    <div class="back-link">
-        <a href="{% url 'product_post:product_detail' product.publish.year product.publish.month product.publish.day product.slug %}">← Back to Product</a>
-    </div>
-</div>
+    <a href="{% url 'product_post:product_detail' product.slug}"> Back to Product </a>
 {% endblock %}

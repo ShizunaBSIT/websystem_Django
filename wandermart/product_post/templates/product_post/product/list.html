@@ -59,7 +59,7 @@
             <p class="date">Listed: {{ product.publish }}</p>
             <p class="stock">Stock: {{ product.stock }}</p>
             {% if product.stock > 0 %}
-                <button class="buy_now" onclick="window.location.href='{{product.get_absolute_url}}'">Buy Now</button>
+                <button class="buy_now" onclick="window.location.href='/login'">Buy Now</button>
             {% else %}
                 <button class="out_of_stock" disabled>Out of Stock</button>
             {% endif %}
