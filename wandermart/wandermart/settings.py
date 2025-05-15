@@ -128,6 +128,7 @@ STATIC_URL = '/static/'
 # For development purposes
 STATICFILES_DIRS = [BASE_DIR / 'storefront' / 'static']
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = '/static/'
 
 import os
 
