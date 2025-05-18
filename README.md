@@ -11,10 +11,10 @@ open your terminal and navigate to the wandermart directory
 ```cd wandermart```
 
 ### Create a Virtual Environment
-python -m venv venv
+```python -m venv venv```
 
 ### Install requirements
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 ### Run server
-python manage.py runserver
+```python manage.py runserver```
