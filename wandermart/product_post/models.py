@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils import timezone
+from django.db.models import Avg
+from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import UploadedFile
 
 from taggit.managers import TaggableManager
 
@@ -18,7 +22,27 @@ PRODUCT_LISTING_STATUS_CHOICES = (
     ('archived','Archived'),
 ) 
 
-# Product Listing
+
+####### CLOUDINARY
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 10  # 10mb
+
+
+def file_validation(file):
+    if not file:
+        raise ValidationError("No file selected.")
+
+    # For regular upload, we get UploadedFile instance, so we can validate it.
+    # When using direct upload from the browser, here we get an instance of the CloudinaryResource
+    # and file is already uploaded to Cloudinary.
+    # Still can perform all kinds on validations and maybe delete file, approve moderation, perform analysis, etc.
+    if isinstance(file, UploadedFile):
+        if file.size > FILE_UPLOAD_MAX_MEMORY_SIZE:
+            raise ValidationError("File shouldn't be larger than 10MB.")
+
+## https://cloudinary.com/documentation/python_sample_projects
+
+
+################# Product Listing
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
@@ -30,16 +54,20 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True) 
     slug = models.SlugField(max_length=250, unique_for_date='publish') # for URL purposes
     status = models.CharField(max_length=10, choices=PRODUCT_LISTING_STATUS_CHOICES, default='draft')
-    image = models.ImageField(upload_to='products/', null=True, blank=True)
+    #image = models.ImageField(upload_to='products/', null=True, blank=True)
+    image = CloudinaryField('image',validators=[file_validation], null=True, blank=True)
+    avg_rating = models.FloatField(default=0.0)
     published = PublishedManager()
 
     tags = TaggableManager()
+
+    objects = models.Manager()
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['price']
+        ordering = ['-avg_rating','price']
 
     # absolute page url
     def get_absolute_url(self):
@@ -64,6 +92,12 @@ class Review(models.Model):
     
     def __str__(self):
         return f'Comment by {self.user} on {self.product}'
+    
+    # average rating change
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.product.avg_rating = self.product.reviews.aggregate(Avg('rating'))['rating__avg']
+        self.product.save()
 
 
 

@@ -5,9 +5,13 @@ from product_post.models import Product
 from django.urls import reverse
 import random
 
+def generate_order_number():
+    return str(random.randint(10000, 99999))
+
+
 # Create your models here.
 class Order(models.Model):
-    orderNum = models.CharField(max_length=150, default=str(random.randint(10000, 99999)))
+    orderNum = models.CharField(max_length=150, default=generate_order_number)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity = models.IntegerField()

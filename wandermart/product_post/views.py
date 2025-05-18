@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 from .exceptions import LoginRequired
 # pagination
 from django.views.generic import ListView
+from taggit.models import Tag
 
 # le forms
-from .forms import ReviewForm, LoginForm, RegistrationForm #UserCreationForm
+from .forms import ReviewForm, LoginForm, RegistrationForm, SearchForm #UserCreationForm
+from django.contrib.postgres.search import SearchVector
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -16,7 +18,25 @@ from django.contrib import messages
 # Create your views here.
 def product_list(request):
     products = Product.published.all()
-    return render(request, 'product_post/product/list.html', {"products": products})
+    searchform = SearchForm()
+
+    return render(request, 'product_post/product/list.html', {"products": products, "searchform":searchform})
+
+def product_search(request):
+    searchform = SearchForm()
+    query = None
+    products = []
+
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            products = Product.published.annotate(
+                search=SearchVector('name', 'description'),
+            ).filter(search=query)
+
+    return render(request, 'product_post/product/search.html',
+            {'searchform':searchform, 'products':products, 'query':query})
 
 @login_required(login_url='product_post:loginformpage')
 def product_detail(request, year, month, day, product):
@@ -29,6 +49,11 @@ def product_detail(request, year, month, day, product):
     #reviews
     reviews = product.reviews.filter(active=True)
     new_review = None
+
+    # get similar products, limit the query to 5 objects because our layout wouldnt have enough space
+    # and im too lazy to add a scrollable bar that will also contain an update function for the user to keep scrolling
+    product_tags = product.tags.values_list('name', flat=True)
+    similar_products = Product.objects.exclude(id=product.id).filter(tags__name__in=product_tags).distinct()[:5]
     
     if request.method == "POST":
         #review_form = ReviewForm(data=request.POST, user=request.user)
@@ -47,13 +72,15 @@ def product_detail(request, year, month, day, product):
         #review_form = ReviewForm(user=request.user)
         review_form = ReviewForm()
 
-    return render(request, 'product_post/product/detail.html', {"product": product, 'reviews': reviews, 'new_review':new_review, 'review_form': review_form})
+    return render(request, 'product_post/product/detail.html', 
+            {"product": product, 'reviews': reviews, 'new_review':new_review, 'review_form': review_form, 'similar_products':similar_products})
 
 class ProductListView(ListView):
     queryset = Product.published.all()
     context_object_name = "products"
     paginate_by = 10
     template_name = "product_post/product/list.html"
+
 
 
 ##### LOGIN

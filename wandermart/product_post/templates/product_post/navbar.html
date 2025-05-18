@@ -8,7 +8,12 @@
         <li><a href="/contact">Contact</a></li>
     </ul>
     <div class="nav-icons">
-        <a href="{{ store.get_absolute_url }}"><img src="/static/icons/login1.svg" alt="login" width="30" height="30"></a>
-        <a href="{{ store.get_absolute_url }}"><img src="/static/icons/register1.svg" alt="login" width="30" height="30"></a>
+        <a href="{% url 'product_post:loginformpage' %}"><img src="/static/product_post/icons/login1.svg" alt="login" width="30" height="30"></a>
+        <a href="{% url 'product_post:register' %}"><img src="/static/product_post/icons/register1.svg" alt="register" width="30" height="30"></a>
     </div>
+
+   <form method="get" action="{% url 'product_post:product_search' %}">
+        <input type="text" placeholder="Search" name="query">
+        <button type="submit">Submit</button>
+    </form>
 </nav>

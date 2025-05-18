@@ -5,6 +5,8 @@ from django.shortcuts import reverse
 from .exceptions import LoginRequired
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+class SearchForm(forms.Form):
+    query = forms.CharField(required=False, max_length=255)
 
 class ReviewForm(forms.ModelForm):
 

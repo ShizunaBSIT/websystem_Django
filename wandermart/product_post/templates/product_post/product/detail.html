@@ -4,11 +4,14 @@
 {% block title %} {{ product.name }} {% endblock %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'product_post/css/prodcust_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/product_post/product_detail.css' %}">
     <h1> {{product.name}} </h1>
     <p class="date">
         Listed: {{ product.publish }} by {{ product.store }}
     </p>
+    <p> Average Rating: {{product.avg_rating}} </p>
+
+    <img src="{{product.image.url}}" width=500, height=500>
 
     <!-- Place post details here -->
     <p class="description">
@@ -20,6 +23,25 @@
     {% with reviews.count as total_reviews %}
         <h3> Reviews: {{ total_reviews }} </h3>
     {% endwith %}
+
+    <!-- SIMILAR PRPODUCTASFSDSZCZSA -->
+    <h3>Similar Products </h3>
+    <table>
+        <tr>
+            {% for similar_product in similar_products %}
+            <td>
+                <img src="{{similar_product.image.url}}" alt="{{similar_product.name}}" width=50 height=50>
+                <h5><a href="{{ similar_product.get_absolute_url }}">{{ similar_product.name }}</a></h5>
+                <p> Rating: {{ similar_product.avg_rating }} </p>
+            </td>
+
+            {% empty %}
+            <td>
+                <h5>There are no similar products </h5>
+            <td>
+            {% endfor %}
+        </tr>
+    </table>
 
 
     <!-- REVIEWS LIST -->

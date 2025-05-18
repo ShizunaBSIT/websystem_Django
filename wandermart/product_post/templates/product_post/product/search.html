@@ -1,0 +1,38 @@
+{% extends "product_post/base.html" %}
+{% load static %}
+
+{% block title %}Wandermart: Aesthetic Marketplace{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'product_post/css/list_product.css' %}">
+
+<!-- Product Grid -->
+<h3> You searched for {{ query }} </h3>
+
+<div class="container">
+    {% for product in products %}
+       
+        <div class="product_card">
+            <div class="image-wrapper">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product_image">
+            </div>
+            <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+            <p class="date">Listed: {{ product.publish }}</p>
+            <p class="stock">Stock: {{ product.stock }}</p>
+            {% if product.stock > 0 %}
+                <button class="buy_now" onclick="window.location.href='/login'">Buy Now</button>
+            {% else %}
+                <button class="out_of_stock" disabled>Out of Stock</button>
+            {% endif %}
+        </div>
+
+    {% empty %}
+        <h2>We couldn't find any related products </h2>
+
+
+    {% endfor %}
+</div>
+
+{% include "product_post/footer.html" with page=page_obj %}
+
+{% endblock %}
