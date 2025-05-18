@@ -20,7 +20,7 @@
             <p class="date">Listed: {{ product.publish }}</p>
             <p class="stock">Stock: {{ product.stock }}</p>
             {% if product.stock > 0 %}
-                <button class="buy_now" onclick="window.location.href='/login'">Buy Now</button>
+                <button class="buy_now" onclick="window.location.href='product.get_absolute_url'">Buy Now</button>
             {% else %}
                 <button class="out_of_stock" disabled>Out of Stock</button>
             {% endif %}
@@ -32,6 +32,32 @@
 
     {% endfor %}
 </div>
+
+<h3> Search Results based on {{ query}} as tag </h3>
+<div class="container">
+    {% for tag_product in tag_products %}
+       
+        <div class="product_card">
+            <div class="image-wrapper">
+                <img src="{{ tag_product.image.url }}" alt="{{ tag_product.name }}" class="product_image">
+            </div>
+            <h2><a href="{{ tag_product.get_absolute_url }}">{{ tag_product.name }}</a></h2>
+            <p class="date">Listed: {{ tag_product.publish }}</p>
+            <p class="stock">Stock: {{ tag_product.stock }}</p>
+            {% if tag_product.stock > 0 %}
+                <button class="buy_now" onclick="window.location.href='tag_product.get_absolute_url'">Buy Now</button>
+            {% else %}
+                <button class="out_of_stock" disabled>Out of Stock</button>
+            {% endif %}
+        </div>
+
+    {% empty %}
+        <h2>We couldn't find any related products </h2>
+
+
+    {% endfor %}
+</div>
+
 
 {% include "product_post/footer.html" with page=page_obj %}
 

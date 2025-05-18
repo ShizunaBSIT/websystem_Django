@@ -1,5 +1,7 @@
 {% extends "product_post/base.html" %}
 {% load static %}
+{% load socialaccount %}
+{% load i18n %}
 
 {% block content %}
 <body class="login-page">
@@ -12,22 +14,43 @@
         <h1 class="title">Wandermart</h1>
         <p class="subtitle">Discover global flavors, just a click away.</p>
 
-        <h2 class="welcome-msg">Welcome, {% if user.is_authenticated %}{{ user.username }}{% else %}Traveler{% endif %}! Your favorite treats await.</h2>
+        <h2 class="welcome-msg">
+        {% if user.is_authenticated %}
+            {% blocktrans %}Welcome, {{ user.username }}! Your favorite treats await.{% endblocktrans %}
+        {% else %}
+            {% blocktrans %}Welcome, Traveler! Your favorite treats await.{% endblocktrans %}
+        {% endif %}
+        </h2>
+
+        <div class="socialaccount_ballot">
+            <ul class="socialaccount_providers">
+            {% get_providers as social_providers %}
+            {% for provider in social_providers %}
+                <li>
+                    <a title="{% blocktrans with provider_name=provider.name %}Sign in via {{ provider_name }}{% endblocktrans %}"
+                        class="socialaccount_provider {{ provider.id }}"
+                        href="{% provider_login_url provider.id process='login' %}">
+                    {{ provider.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+            <div class="login-or">{% trans 'or' %}</div>
+        </div>
 
         <form method="post" class="login-form">
             {{ login_form.as_p }}
             {% csrf_token %}
             <button type="submit" class="login-button">
-                <span class="chopsticks"></span> Login
+                <span class="chopsticks"></span> {% trans "Login" %}
             </button>
         </form>
 
         <p class="register-link">
-            New here? <a href="{% url 'product_post:register' %}">Sign up</a> and start exploring!
+            {% translate "New here?" %} <a href="{% url 'product_post:register' %}">{% translate "Sign up" %}</a> {% translate "and start exploring!" %}
         </p>
     </div>
 
-    <!-- Floating Food Decorations (using <img>) -->
     <div class="floating-food-wrapper">
         <img src="{% static 'product_post/images/snack5.png' %}" class="floating-food sushi" />
         <img src="{% static 'product_post/images/snack3.png' %}" class="floating-food ramen" />

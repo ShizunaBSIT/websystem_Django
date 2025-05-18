@@ -26,6 +26,7 @@ def product_search(request):
     searchform = SearchForm()
     query = None
     products = []
+    tag_products = []
 
     if 'query' in request.GET:
         form = SearchForm(request.GET)
@@ -35,8 +36,11 @@ def product_search(request):
                 search=SearchVector('name', 'description'),
             ).filter(search=query)
 
+            # find products based on tags
+            tag_products = Product.published.filter(tags__name__contains=query)
+
     return render(request, 'product_post/product/search.html',
-            {'searchform':searchform, 'products':products, 'query':query})
+            {'searchform':searchform, 'products':products, 'query':query, 'tag_products':tag_products})
 
 @login_required(login_url='product_post:loginformpage')
 def product_detail(request, year, month, day, product):
@@ -74,6 +78,7 @@ def product_detail(request, year, month, day, product):
 
     return render(request, 'product_post/product/detail.html', 
             {"product": product, 'reviews': reviews, 'new_review':new_review, 'review_form': review_form, 'similar_products':similar_products})
+
 
 class ProductListView(ListView):
     queryset = Product.published.all()
