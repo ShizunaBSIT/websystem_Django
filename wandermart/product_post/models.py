@@ -5,6 +5,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils import timezone
 
+from taggit.managers import TaggableManager
+
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status='published')
@@ -30,6 +32,8 @@ class Product(models.Model):
     status = models.CharField(max_length=10, choices=PRODUCT_LISTING_STATUS_CHOICES, default='draft')
     image = models.ImageField(upload_to='products/', null=True, blank=True)
     published = PublishedManager()
+
+    tags = TaggableManager()
 
     def __str__(self):
         return self.name

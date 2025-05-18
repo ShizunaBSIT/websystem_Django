@@ -72,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'wandermart.wsgi.application'
+TAGGIT_CASE_INSENSITIVE = True
 
 
 # Database

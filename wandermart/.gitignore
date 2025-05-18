@@ -6,11 +6,15 @@ __pycache__/
 *.sqlite3
 .env
 .env.*
+
+# ignore virtual environments
+/venv/
 env/
 venv/
 ENV/
 .venv/
 *.log
+
 # Migrations (optional: you can ignore migrations if you prefer)
 **/migrations/*.pyc
 **/migrations/__pycache__/
